@@ -122,6 +122,8 @@
 
 <script>
 
+  const uri = 'https://nodejs-agenda-back-end.herokuapp.com/'
+
   class Contacto {
     constructor(
       nombre, apellido, telefono, 
@@ -154,7 +156,7 @@
     methods: {
 
       obtenerContactos (){
-        fetch('/api/agenda',)
+        fetch(uri,{ method: 'GET' })
         .then( res => res.json() )
         .then( data => {
           //console.log('data :', data)
@@ -165,7 +167,7 @@
       enviarContacto() {
         if(!this.editar){
 
-          fetch('/api/agenda',{
+          fetch(uri,{
             method: 'POST',
             body: JSON.stringify(this.contacto),
             headers: {
@@ -181,7 +183,7 @@
 
         }else{
 
-          fetch('/api/agenda/' + this.contactoAEditar,{
+          fetch(uri + this.contactoAEditar,{
             method: 'PUT',
             body: JSON.stringify(this.contacto),
             headers: {
@@ -205,7 +207,7 @@
         const valid = confirm('confirme si desea eliminar el contacto')
         if(valid){
 
-          fetch('api/agenda/' + id,{
+          fetch(uri + id,{
             method:'DELETE',
             headers: {
               'Accept': 'application/json',
@@ -222,7 +224,7 @@
 
       editarContacto(id){
         //console.log('object :', id)
-        fetch('/api/agenda/' + id)
+        fetch(uri + id)
           .then( res => res.json() )
           .then( data => {
             //console.log('data :', data)
