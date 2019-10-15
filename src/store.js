@@ -78,6 +78,7 @@ export default new Vuex.Store({
       })
       const data = await response.json()
       if(data.Ok){
+        commit('vaciarContacto')
         dispatch('obtenerContactos')
       }else{
         this.state.errores = data.errores
